@@ -1,216 +1,383 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Tracker Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-</head>
-<body class="bg-gray-100 font-sans">
-
-  <!-- Dashboard -->
-  <header class="lg:max-w-[1100px] mx-auto pt-10 max-w-[90%] m ">
-    <h1 class="text-3xl font-bold mb-6 text-center sm:text-left">Job Application Tracker</h1>
-    <div class="flex flex-wrap gap-4 md:gap-0 justify-between">
-      <div class="card bg-base-100 shadow-sm w-full md:w-[32%]">
-        <div class="card-body text-center">
-          <h2 class="card-title">Total</h2>
-          <p id="totalJob">8</p>
-        </div>
-      </div>
-      <div class="card bg-base-100 shadow-sm w-full md:w-[32%]">
-        <div class="card-body text-center">
-          <h2 class="card-title">Interview</h2>
-          <p id="interviewCount">0</p>
-        </div>
-      </div>
-      <div class="card bg-base-100 shadow-sm w-full md:w-[32%]">
-        <div class="card-body text-center">
-          <h2 class="card-title">Rejected</h2>
-          <p id="rejectedCount">0</p>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Available Jobs Section -->
-  <section class="lg:max-w-[1100px] mx-auto mt-10 max-w-[90%]">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-semibold">Available Jobs</h2>
-      <p id="availableJobCount">8 Job(s)</p>
-    </div>
-
-    <!-- Tabs -->
-    <div class="flex gap-3 mb-5">
-      <button id="allTab" class="btn btn-primary">All</button>
-      <button id="interviewTab" class="btn">Interview</button>
-      <button id="rejectedTab" class="btn">Rejected</button>
-    </div>
-
-    <!-- All Jobs Container with 8 cards -->
-    <div id="allJobs" class="grid grid-cols-1  gap-5">
-      <!-- Job 1 -->
-      <div class="card bg-base-100 shadow-sm p-5 mb-3 job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">Tech Solutions Ltd.</h3>
-            <h4 class="text-lg opacity-70">Frontend Developer</h4>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Tracker Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Dashboard -->
+    <header class="lg:max-w-[1100px] mx-auto pt-10 max-w-[90%] m">
+      <h1 class="text-3xl font-bold mb-6 text-center sm:text-left">
+        Job Application Tracker
+      </h1>
+      <div class="flex flex-wrap gap-4 md:gap-0 justify-between">
+        <div class="card bg-base-100 shadow-sm w-full md:w-[32%]">
+          <div class="card-body text-center">
+            <h2 class="card-title">Total</h2>
+            <p id="totalJob">8</p>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash cursor-pointer text-xl"></i></button>
         </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> Remote | <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $80,000</p>
-        <p class="mt-2 text-gray-700">Build and maintain web applications with React and Tailwind.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
-        </div>
-      </div>
-
-      <!-- Job 2 -->
-      <div class="card bg-base-100 shadow-sm p-5 my-2 job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">NextGen Corp</h3>
-            <h4 class="text-lg opacity-70">Backend Developer</h4>
+        <div class="card bg-base-100 shadow-sm w-full md:w-[32%]">
+          <div class="card-body text-center">
+            <h2 class="card-title">Interview</h2>
+            <p id="interviewCount">0</p>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash text-xl cursor-pointer"></i></button>
         </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> New York | <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $95,000</p>
-        <p class="mt-2 text-gray-700">Design APIs and maintain server-side architecture with Node.js and Express.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
-        </div>
-      </div>
-
-      <!-- Job 3 -->
-      <div class="card bg-base-100 shadow-sm p-5 my-2  job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">Creative Minds</h3>
-            <h4 class="text-lg opacity-70">UI/UX Designer</h4>
+        <div class="card bg-base-100 shadow-sm w-full md:w-[32%]">
+          <div class="card-body text-center">
+            <h2 class="card-title">Rejected</h2>
+            <p id="rejectedCount">0</p>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash text-xl cursor-pointer"></i></button>
-        </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> Remote | <strong>Type:</strong> Part-Time | <strong>Salary:</strong> $60,000</p>
-        <p class="mt-2 text-gray-700">Design user-friendly interfaces and improve user experience for web applications.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
         </div>
       </div>
+    </header>
 
-      <!-- Job 4 -->
-      <div class="card bg-base-100 shadow-sm p-5 my-2  job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">Innovatech</h3>
-            <h4 class="text-lg opacity-70">Full Stack Developer</h4>
+    <!-- Available Jobs Section -->
+    <section class="lg:max-w-[1100px] mx-auto mt-10 max-w-[90%]">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Available Jobs</h2>
+        <p id="availableJobCount">8 Job(s)</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-3 mb-5">
+        <button id="allTab" class="btn btn-primary">All</button>
+        <button id="interviewTab" class="btn">Interview</button>
+        <button id="rejectedTab" class="btn">Rejected</button>
+      </div>
+
+      <!-- All Jobs Container with 8 cards -->
+      <div id="allJobs" class="grid grid-cols-1 gap-5">
+        <!-- Job 1 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 mb-3 job-card "
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">Tech Solutions Ltd.</h3>
+              <h4 class="text-lg opacity-70">Frontend Developer</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash cursor-pointer text-xl"></i>
+            </button>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash text-xl cursor-pointer"></i></button>
-        </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> San Francisco | <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $110,000</p>
-        <p class="mt-2 text-gray-700">Develop front-end and back-end applications using React and Node.js.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
-        </div>
-      </div>
-
-      <!-- Job 5 -->
-      <div class="card bg-base-100 shadow-sm p-5 my-2  job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">DataWorks</h3>
-            <h4 class="text-lg opacity-70">Data Analyst</h4>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> Remote | <strong>Type:</strong> Full-Time
+            | <strong>Salary:</strong> $80,000
+          </p>
+           <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden  btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Build and maintain web applications with React and Tailwind.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash text-xl cursor-pointer"></i></button>
         </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> Boston | <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $75,000</p>
-        <p class="mt-2 text-gray-700">Analyze data trends and generate reports using Python and SQL.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
-        </div>
-      </div>
 
-      <!-- Job 6 -->
-      <div class="card bg-base-100 shadow-sm p-5 my-2  job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">CyberNet</h3>
-            <h4 class="text-lg opacity-70">Cybersecurity Engineer</h4>
+        <!-- Job 2 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 my-2 job-card"
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">NextGen Corp</h3>
+              <h4 class="text-lg opacity-70">Backend Developer</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash text-xl cursor-pointer"></i>
+            </button>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash text-xl cursor-pointer"></i></button>
-        </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> Remote | <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $100,000</p>
-        <p class="mt-2 text-gray-700">Secure applications and networks by identifying vulnerabilities and risks.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
-        </div>
-      </div>
-
-      <!-- Job 7 -->
-      <div class="card bg-base-100 shadow-sm p-5 my-2  job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">Cloudify</h3>
-            <h4 class="text-lg opacity-70">Cloud Engineer</h4>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> New York |
+            <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $95,000
+          </p>
+             <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden  btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Design APIs and maintain server-side architecture with Node.js and
+            Express.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash text-xl cursor-pointer"></i></button>
         </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> Seattle | <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $120,000</p>
-        <p class="mt-2 text-gray-700">Manage cloud infrastructure and deploy scalable applications on AWS.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
-        </div>
-      </div>
 
-      <!-- Job 8 -->
-      <div class="card bg-base-100 shadow-sm p-5 my-2  job-card" data-status ="all">
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-2xl font-bold">AI Labs</h3>
-            <h4 class="text-lg opacity-70">Machine Learning Engineer</h4>
+        <!-- Job 3 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 my-2 job-card"
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">Creative Minds</h3>
+              <h4 class="text-lg opacity-70">UI/UX Designer</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash text-xl cursor-pointer"></i>
+            </button>
           </div>
-          <button class="deleteBtn text-red-500"><i class="fa-solid fa-trash text-xl cursor-pointer"></i></button>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> Remote | <strong>Type:</strong> Part-Time
+            | <strong>Salary:</strong> $60,000
+          </p>
+               <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden rejectBtn btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Design user-friendly interfaces and improve user experience for web
+            applications.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
+          </div>
         </div>
-        <p class="text-sm mt-2"><strong>Location:</strong> Remote | <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $130,000</p>
-        <p class="mt-2 text-gray-700">Develop ML models and integrate AI solutions for enterprise applications.</p>
-        <div class="flex gap-3 mt-4">
-          <button class="interviewBtn btn btn-outline btn-success">Interview</button>
-          <button class="rejectBtn btn btn-outline btn-error">Rejected</button>
+
+        <!-- Job 4 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 my-2 job-card"
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">Innovatech</h3>
+              <h4 class="text-lg opacity-70">Full Stack Developer</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash text-xl cursor-pointer"></i>
+            </button>
+          </div>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> San Francisco |
+            <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $110,000
+          </p>
+               <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden rejectBtn btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Develop front-end and back-end applications using React and Node.js.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
+          </div>
+        </div>
+
+        <!-- Job 5 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 my-2 job-card"
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">DataWorks</h3>
+              <h4 class="text-lg opacity-70">Data Analyst</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash text-xl cursor-pointer"></i>
+            </button>
+          </div>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> Boston | <strong>Type:</strong> Full-Time
+            | <strong>Salary:</strong> $75,000
+          </p>
+               <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden rejectBtn btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Analyze data trends and generate reports using Python and SQL.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
+          </div>
+        </div>
+
+        <!-- Job 6 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 my-2 job-card"
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">CyberNet</h3>
+              <h4 class="text-lg opacity-70">Cybersecurity Engineer</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash text-xl cursor-pointer"></i>
+            </button>
+          </div>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> Remote | <strong>Type:</strong> Full-Time
+            | <strong>Salary:</strong> $100,000
+          </p>
+               <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden rejectBtn btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Secure applications and networks by identifying vulnerabilities and
+            risks.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
+          </div>
+        </div>
+
+        <!-- Job 7 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 my-2 job-card"
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">Cloudify</h3>
+              <h4 class="text-lg opacity-70">Cloud Engineer</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash text-xl cursor-pointer"></i>
+            </button>
+          </div>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> Seattle |
+            <strong>Type:</strong> Full-Time | <strong>Salary:</strong> $120,000
+          </p>
+               <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden rejectBtn btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Manage cloud infrastructure and deploy scalable applications on AWS.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
+          </div>
+        </div>
+
+        <!-- Job 8 -->
+        <div
+          class="card bg-base-100 shadow-sm p-5 my-2 job-card"
+          data-status="all"
+        >
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-2xl font-bold">AI Labs</h3>
+              <h4 class="text-lg opacity-70">Machine Learning Engineer</h4>
+            </div>
+            <button class="deleteBtn text-red-500">
+              <i class="fa-solid fa-trash text-xl cursor-pointer"></i>
+            </button>
+          </div>
+          <p class="text-sm mt-2">
+            <strong>Location:</strong> Remote | <strong>Type:</strong> Full-Time
+            | <strong>Salary:</strong> $130,000
+          </p>
+               <button class="w-30 interviewAprove hidden interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="w-30 requiredApply  hidden rejectBtn btn btn-outline btn-error ">
+              Rejected
+            </button>
+          <p class="mt-2 text-gray-700">
+            Develop ML models and integrate AI solutions for enterprise
+            applications.
+          </p>
+          <div class="flex gap-3 mt-4">
+            <button class="interviewBtn btn btn-outline btn-success">
+              Interview
+            </button>
+            <button class="rejectBtn btn btn-outline btn-error">
+              Rejected
+            </button>
+          </div>
         </div>
       </div>
 
-    </div>
-
-    <!-- Interview Section -->
-    <div id="interviewJobs" class="hidden  mt-10">
-      <div id="interviewHidden" class="text-center py-20">
-        <img class="w-24 mx-auto" src="jobs.png" alt="No Jobs" />
-        <h3 class="text-2xl font-semibold">No jobs available</h3>
-        <p class="text-lg mt-2">Check back soon for interview opportunities</p>
+      <!-- Interview Section -->
+      <div id="interviewJobs" class="hidden mt-10">
+        <div id="interviewHidden" class="text-center py-20">
+          <img class="w-24 mx-auto" src="jobs.png" alt="No Jobs" />
+          <h3 class="text-2xl font-semibold">No jobs available</h3>
+          <p class="text-lg mt-2">
+            Check back soon for interview opportunities
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- Rejected Section -->
-    <div id="rejectedJobs" class="hidden mt-10">
-      <div id="rejectedHidden" class="text-center py-20">
-        <img class="w-24 mx-auto" src="jobs.png" alt="No Jobs Rejected" />
-        <h3 class="text-2xl font-semibold">No jobs available</h3>
-        <p class="text-lg mt-2">Check back soon for rejected opportunities</p>
+      <!-- Rejected Section -->
+      <div id="rejectedJobs" class="hidden mt-10">
+        <div id="rejectedHidden" class="text-center py-20">
+          <img class="w-24 mx-auto" src="jobs.png" alt="No Jobs Rejected" />
+          <h3 class="text-2xl font-semibold">No jobs available</h3>
+          <p class="text-lg mt-2">Check back soon for rejected opportunities</p>
+        </div>
       </div>
-    </div>
+    </section>
 
-  </section>
-
-  <!-- JavaScript -->
- <script src="script/script.js"></script>
-
-</body>
+    <!-- JavaScript -->
+    <script src="script/script.js"></script>
+  </body>
 </html>
