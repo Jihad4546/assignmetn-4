@@ -17,9 +17,10 @@ function updateCounts() {
   rejectedCountElement.innerText = rejectedCount;
 
   const activeTab = document.querySelector(".btn-primary").id;
-
   if (activeTab === "allTab") {
-    availableJobCountElement.innerText = totalJobs + " Job(s)";
+    const visibleJobs = allJobsContainer.querySelectorAll(".job-card").length;
+    availableJobCountElement.innerText = visibleJobs + " Job(s)";
+
   } else if (activeTab === "interviewTab") {
     availableJobCountElement.innerText = interviewCount + " Job(s)";
   } else if (activeTab === "rejectedTab") {
@@ -53,6 +54,11 @@ document.querySelectorAll(".interviewBtn").forEach((btn) => {
     approveBtn.classList.remove("hidden");
        const approveBtn1 =this.closest(".job-card").querySelector(".requiredApply");
     approveBtn1.classList.add("hidden");
+
+
+    
+
+
     updateCounts();
   });
 });
@@ -65,6 +71,7 @@ document.querySelectorAll(".rejectBtn").forEach((btn) => {
     if (prevStatus !== "rejected") rejectedCount++;
     card.setAttribute("data-status", "rejected");
     rejectedJobsContainer.appendChild(card);
+    availableJobCount--;
     const rejectedJobs = document.getElementById("rejectedHidden");
     rejectedJobs.classList.add("hidden");
     const approveBtn =this.closest(".job-card").querySelector(".requiredApply");
@@ -79,16 +86,13 @@ document.getElementById("allTab").addEventListener("click", () => {
   allJobsContainer.classList.remove("hidden");
   interviewJobsContainer.classList.add("hidden");
   rejectedJobsContainer.classList.add("hidden");
-
   const allTab = document.getElementById("allTab");
   allTab.classList.add("btn-primary");
-
   const interviewTab = document.getElementById("interviewTab");
   interviewTab.classList.remove("btn-primary");
-
   const rejectedTab = document.getElementById("rejectedTab");
   rejectedTab.classList.remove("btn-primary");
-  updateCounts();
+  
 });
 
 document.getElementById("interviewTab").addEventListener("click", () => {
