@@ -28,6 +28,7 @@ function updateCounts() {
   }
 }
 
+
 document.querySelectorAll(".deleteBtn").forEach((btn) => {
   btn.addEventListener("click", function () {
     const card = this.closest(".job-card");
