@@ -15,7 +15,16 @@ function updateCounts() {
   totalJobElement.innerText = totalJobs;
   interviewCountElement.innerText = interviewCount;
   rejectedCountElement.innerText = rejectedCount;
-  availableJobCountElement.innerText = totalJobs + " Job(s)";
+
+  const activeTab = document.querySelector(".btn-primary").id;
+
+  if (activeTab === "allTab") {
+    availableJobCountElement.innerText = totalJobs + " Job(s)";
+  } else if (activeTab === "interviewTab") {
+    availableJobCountElement.innerText = interviewCount + " Job(s)";
+  } else if (activeTab === "rejectedTab") {
+    availableJobCountElement.innerText = rejectedCount + " Job(s)";
+  }
 }
 
 document.querySelectorAll(".deleteBtn").forEach((btn) => {
@@ -37,9 +46,7 @@ document.querySelectorAll(".interviewBtn").forEach((btn) => {
     if (prevStatus === "rejected") rejectedCount--;
     if (prevStatus !== "interview") interviewCount++;
     card.setAttribute("data-status", "interview");
-    const coloneCard = card.cloneNode(true);
-    coloneCard.setAttribute('data-from','interview')
-    interviewJobsContainer.appendChild(coloneCard);
+    interviewJobsContainer.appendChild(card);
     const interviewHidden = document.getElementById("interviewHidden");
     interviewHidden.classList.add("hidden");
     const approveBtn = this.closest(".job-card").querySelector(".interviewAprove");
@@ -53,12 +60,10 @@ document.querySelectorAll(".interviewBtn").forEach((btn) => {
 document.querySelectorAll(".rejectBtn").forEach((btn) => {
   btn.addEventListener("click", function () {
     const card = this.closest(".job-card");
-    console.log(card);
     const prevStatus = card.getAttribute("data-status");
-    console.log(prevStatus)
     if (prevStatus === "interview") interviewCount--;
     if (prevStatus !== "rejected") rejectedCount++;
-    card.setAttribute("data-from", "rejected");
+    card.setAttribute("data-status", "rejected");
     rejectedJobsContainer.appendChild(card);
     const rejectedJobs = document.getElementById("rejectedHidden");
     rejectedJobs.classList.add("hidden");
@@ -74,15 +79,17 @@ document.getElementById("allTab").addEventListener("click", () => {
   allJobsContainer.classList.remove("hidden");
   interviewJobsContainer.classList.add("hidden");
   rejectedJobsContainer.classList.add("hidden");
+
   const allTab = document.getElementById("allTab");
   allTab.classList.add("btn-primary");
+
   const interviewTab = document.getElementById("interviewTab");
   interviewTab.classList.remove("btn-primary");
+
   const rejectedTab = document.getElementById("rejectedTab");
   rejectedTab.classList.remove("btn-primary");
+  updateCounts();
 });
-
-
 
 document.getElementById("interviewTab").addEventListener("click", () => {
   const allTab = document.getElementById("allTab");
@@ -94,6 +101,7 @@ document.getElementById("interviewTab").addEventListener("click", () => {
   allJobsContainer.classList.add("hidden");
   interviewJobsContainer.classList.remove("hidden");
   rejectedJobsContainer.classList.add("hidden");
+   updateCounts();
 });
 
 document.getElementById("rejectedTab").addEventListener("click", () => {
@@ -106,4 +114,5 @@ document.getElementById("rejectedTab").addEventListener("click", () => {
   rejectedTab.classList.add("btn-primary");
   const interviewTab = document.getElementById("interviewTab");
   interviewTab.classList.remove("btn-primary");
+   updateCounts();
 });
